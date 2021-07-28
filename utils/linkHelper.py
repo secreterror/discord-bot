@@ -3,8 +3,8 @@ a=db.getDb("db.json")
 
 
 #links for courses
-courses=['ml','adsa','bm','hci','maa','cd']
-labCourse=[]
+courses=['ml','adsa','bm','hci','oe','pe']
+labCourse=['ml-lab','adsa-lab']
 
 
 #commands

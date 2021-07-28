@@ -33,41 +33,41 @@ async def on_message(message):
 
             if isValidCommand(message,GET_LINK):
 
-                course=messageContent[1]
+                course=messageContent[1].lower()
                 section=channel
 
                 if isValidCourse(course) or isValidLabCourse(course):
 
                     if isCallFromSection(channel):
                         if isValidLabCourse(course):
-                            return await message.channel.send('Please ask for this link in your subsection channel')
+                            return await message.channel.send('hey {},please ask for this link in your subsection channel!'.format(message.author.mention))
                         link=a.getBy({"section":section,"course":course})
                     else:
                         if isValidCourse(course):
-                            return await message.channel.send('Please ask for this link in your section channel')
+                            return await message.channel.send('hey {},please ask for this link in your section channel!'.format(message.author.mention))
                         link=a.getBy({"subsection":section,"course":course})
                     if len(link)!=0:
                         print('here')
-                        return await message.channel.send("hey, {} your {} link is {}".format(message.author.mention,course,link[0]['link']))
+                        return await message.channel.send("hey {}, your {} link is {}".format(message.author.mention,course,link[0]['link']))
                     else:
-                        return await message.channel.send(NO_LINKS_AVAILABLE)
+                        return await message.channel.send("hey {}, {}!".format(message.author.mention,NO_LINKS_AVAILABLE))
                 else:
-                    return await message.channel.send(NOT_A_VALID_COURSE)
+                    return await message.channel.send("hey {}, {}!".format(message.author.mention,NOT_A_VALID_COURSE))
     
         elif message.content.startswith(UPDATE_LINK):
             
             if isValidCommand(message,UPDATE_LINK):
-                course=messageContent[1]
+                course=messageContent[1].lower()
                 link=messageContent[2]
                 section=getSection(roles)
                 subsection=getSubsection(roles)
 
                 if isCr(roles)==False:
-                    return await message.channel.send(YOU_ARE_NOT_A_CR)
+                    return await message.channel.send("hey {},{} !".format(message.author.mention,YOU_ARE_NOT_A_CR))
                 if section==NOSECTION:
-                    return await message.channel.send(SECTION_NOT_ASSIGNED)
+                    return await message.channel.send("hey {},{} !".format(message.author.mention,SECTION_NOT_ASSIGNED))
                 if subsection==NOSECTION:
-                    return await message.channel.send(SUBSECTION_NOT_ASSIGNED)
+                    return await message.channel.send("hey {},{} !".format(message.author.mention,SUBSECTION_NOT_ASSIGNED))
                 
                 
                 if isValidCourse(course) or isValidLabCourse(course):
@@ -80,7 +80,7 @@ async def on_message(message):
                         },{
                             "link":link
                         })
-                        return await message.channel.send(LINK_UPDATED)
+                        return await message.channel.send("hey {},{} !".format(message.author.mention,LINK_UPDATED))
                     else:
                         a.add({
                             "subsection":subsection,
@@ -88,9 +88,9 @@ async def on_message(message):
                             "course":course,
                             "link":link
                         })
-                        return await message.channel.send(LINK_UPDATED)
+                        return await message.channel.send("hey {},{} !".format(message.author.mention,LINK_ADDED))
                 else:
-                    return await message.channel.send(NOT_A_VALID_COURSE)
+                    return await message.channel.send("hey {}, {}!".format(message.author.mention,NOT_A_VALID_COURSE))
 
 
 
