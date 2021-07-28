@@ -35,18 +35,12 @@ def isValidCommand(message,command):
             return False
         return True
     else:
-        if len(messageContent)!=3 or len(messageContent)!=4:
+        if len(messageContent)!=3:
             return False
-        
-        day=''
-        messageLength=messageLength+2
+        messageLength=messageLength+3
         course=messageContent[1]
         link=messageContent[2]
         messageLength=messageLength+len(course)+len(link)
-        if len(messageContent)!=4:
-            day=messageContent[3]
-            messageLength=messageLength+1+len(day)
-        
         
         if len(message.content)!=messageLength:
             return False

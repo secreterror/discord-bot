@@ -47,7 +47,6 @@ async def on_message(message):
                             return await message.channel.send('hey {},please ask for this link in your section channel!'.format(message.author.mention))
                         link=a.getBy({"subsection":section,"course":course})
                     if len(link)!=0:
-                        print('here')
                         return await message.channel.send("hey {}, your {} link is {}".format(message.author.mention,course,link[0]['link']))
                     else:
                         return await message.channel.send("hey {}, {}!".format(message.author.mention,NO_LINKS_AVAILABLE))
